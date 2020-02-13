@@ -4,7 +4,10 @@ let id = users[users.length - 1].id + 1
 
 module.exports = {
   getAllUsers: (req, res) => {
-    res.status(200).send(users)
+    const db = req.app.get('db')
+    db.get_all_users().then(users => {
+      res.status(200).send(users)
+    })
   },
 
   getOneUser: (req, res) => {
@@ -24,15 +27,13 @@ module.exports = {
   },
 
   createUser: (req, res) => {
-    const { newUser } = req.body
+    const { first_name, last_name, email } = req.body.newUser
 
-    newUser.id = id
+    const db = req.app.get('db')
 
-    id++
-
-    users.push(newUser)
-
-    res.status(200).send(users)
+    db.create_user([email, last_name]).then(newUser => {
+      res.status(200).send(newUser)
+    })
   },
 
   updateUser: (req, res) => {

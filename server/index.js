@@ -1,8 +1,11 @@
+require('dotenv').config()
 const express = require('express')
+const massive = require('massive')
 const ctrl = require('./controller')
 
+const { SERVER_PORT, CONNECTION_STRING } = process.env
+
 const app = express()
-const port = 4338
 
 app.use(express.json())
 
@@ -12,4 +15,15 @@ app.post('/api/users', ctrl.createUser)
 app.put('/api/users/:id', ctrl.updateUser)
 app.delete('/api/users/:id', ctrl.deleteUser)
 
-app.listen(port, () => console.log(`Server running on port ${port}`))
+massive({
+  connectionString: CONNECTION_STRING,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+}).then(dbInstance => {
+  app.set('db', dbInstance)
+  console.log(`Hey Andy let's do this thing set`)
+  app.listen(SERVER_PORT, () =>
+    console.log(`Server running on port ${SERVER_PORT}`)
+  )
+})
