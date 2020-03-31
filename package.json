@@ -1,0 +1,24 @@
+{
+  "name": "node-morning-reviews",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wlh18-littlehiawatha/node-morning-reviews.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wlh18-littlehiawatha/node-morning-reviews/issues"
+  },
+  "homepage": "https://github.com/wlh18-littlehiawatha/node-morning-reviews#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1"
+  }
+}
